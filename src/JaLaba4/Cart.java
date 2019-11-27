@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class Cart {
-    private String numberC;
+    private int numberC;
     private String name;
     private String lastN;
     private String middleN;
@@ -16,17 +16,7 @@ public class Cart {
     private Calendar data;
     private int numberP;
 
-    void Cart(){
-        numberC = "1111";
-        this.name = "aaa";
-        lastN = "bbbb";
-        middleN = "cccc";
-        adress = "grod_prod_11";
-        this.work = "dosn't have";
-        data = new GregorianCalendar();
-        numberP = 0000;
-    }
-    void Cart(String num,String name, String last, String middle, String adres, String work, Calendar d, int n){
+    public Cart(int num,String name, String last, String middle, String adres, String work, Calendar d, int n) {
         numberC = num;
         this.name = name;
         lastN = last;
@@ -36,6 +26,27 @@ public class Cart {
         data = d;
         numberP = n;
     }
+
+    public Cart(){
+        numberC = 1111;
+        this.name = "aaa";
+        lastN = "bbbb";
+        middleN = "cccc";
+        adress = "grod_prod_11";
+        this.work = "dosn't have";
+        data = new GregorianCalendar();
+        numberP = 0000;
+    }
+ /*   void Cart(String num,String name, String last, String middle, String adres, String work, Calendar d, int n){
+        numberC = num;
+        this.name = name;
+        lastN = last;
+        middleN = middle;
+        adress = adres;
+        this.work = work;
+        data = d;
+        numberP = n;
+    }*/
     public void setName(String name) {
         this.name = name;
     }
@@ -51,7 +62,7 @@ public class Cart {
     public String getMiddleN() {
         return middleN;
     }
-    public String getNumberC() {
+    public int getNumberC() {
         return numberC;
     }
     public void setAdress(String adress) {
@@ -66,7 +77,7 @@ public class Cart {
     public void setMiddleN(String middleN) {
         this.middleN = middleN;
     }
-    public void setNumberC(String numberC) {
+    public void setNumberC(int numberC) {
         this.numberC = numberC;
     }
     public void setNumberP(int numberP) {
@@ -77,5 +88,10 @@ public class Cart {
     }
     public void print(){
         System.out.println("Номер карты:"+ numberC +" ФИО:" + lastN + " " + name + " " + middleN + " адресс:"+ adress + " должность:" + work + " дата регистрации:" + data.get(Calendar.DAY_OF_MONTH) + " " + data.get(Calendar.MONTH)+" "+ data.get(Calendar.YEAR) + " номер поликлиники:" + numberP);
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(numberC) + ' ' + name + ' ' + lastN + ' ' + middleN + ' '+ adress + ' ' + work + ' ' + data.get(Calendar.DAY_OF_MONTH) + ' ' + data.get(Calendar.MONTH)+' '+ data.get(Calendar.YEAR) + ' ' + String.valueOf(numberP);
     }
 }

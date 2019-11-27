@@ -10,6 +10,8 @@ public class Main {
     static Scanner in = new Scanner(System.in);
     public static void main(String[] args) {
         ArrayList<Cart> carts = new ArrayList<>();
+        ArrayList<Cart> stask = new ArrayList<>();
+        FileClass file = new FileClass();
         boolean OK = true;
         String name = "", lName = "", mName ="", name1 = "", lName1 = "", mName1 ="";;
         int n;
@@ -83,21 +85,34 @@ public class Main {
                     System.out.print("Введите номер поликлиники:");
                     try {
                         n = Integer.parseInt(in.next());
-                        System.out.print("Карты № ");
-                        for(Cart i : carts){
-                            if(i.getNumberP() == n)
-                                System.out.print(i.getNumberC() + " ");
+                        stask = file.read(n);
+                        if (stask.size()>0) {
+                            System.out.println("Пациенты: ");
+                            for (Cart i : stask) {
+                                i.print();
+                            }
                         }
+                        else
+                            System.out.println("нет пациентов в этой поликлинике");
                     }catch (Exception e){
                         System.out.print("Вы не правильно ввели число!!!!");
                     }
                     //endregion
                     break;
                 case 5:
-
-
+                    file = new FileClass();
+                    try {
+                        file.write(carts);
+                    }catch (Exception e){
+                        System.out.println("errors");
+                    }
                     break;
                 case 6:
+                    try {
+                    file.randommm(carts);
+                    }catch (Exception e){
+                        System.out.println("error");
+                    }
                     break;
                 case 7:
                     OK = false;
@@ -111,8 +126,17 @@ public class Main {
         int temp,y,m,d;
         String trash = "";
         boolean tmp = true;
-        System.out.print("Введите номаер карты: ");
-        cart.setNumberC(in.next());
+        tmp = true;
+        while(tmp) {
+            try {
+                System.out.print("Введите номаер карты: ");
+                temp = Integer.parseInt(in.next());
+                cart.setNumberC(temp);
+                tmp = false;
+            } catch (Exception e) {
+                System.out.println("Вы не правильно ввели номер поликлиники! Вам нужно исправиться!");
+            }
+        }   //Ввод номера поликлиники
         System.out.print("Введите ФИО пациента (ЧЕРЕЗ ПРОБЕЛ): ");
         cart.setLastN(in.next());
         cart.setName(in.next());
@@ -127,6 +151,7 @@ public class Main {
         trash = in.nextLine();
         trash = trash.replace(' ','_');
         cart.setWork(trash);
+        tmp = true;
         while (tmp) {
             try {
                 System.out.println("1.дату регистрации будете вводить вручную\n2.выставить текущую дату");
