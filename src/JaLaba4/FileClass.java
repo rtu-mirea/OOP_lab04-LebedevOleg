@@ -17,9 +17,15 @@ public class FileClass {
         fname += ".txt";
         DataOutputStream write = new DataOutputStream(new FileOutputStream(fname));
         for (Cart i : carts) {
-            byte[] text = i.toString().getBytes("UTF-8");
-            write.write(text);
-            write.write("\n".getBytes("UTF-8"));
+            //byte[] text = i.toString().getBytes("UTF-8");
+            write.writeInt(i.getNumberC());
+            write.writeUTF(i.getName());
+            write.writeUTF(i.getLastN());
+            write.writeUTF(i.getMiddleN());
+            write.writeUTF(i.getAdress());
+            write.writeUTF(i.getWork());
+            write.writeUTF(i.getData());
+            write.writeInt(i.getNumberP());
         }
         File f = new File(fname);
         if (f.exists())
@@ -32,13 +38,22 @@ public class FileClass {
 
     public ArrayList<Cart> read(int numP) throws Exception {
         ArrayList<Cart> carts = new ArrayList<>();
-        String[] tmp;
+        String n="",l="",m="",a="",w ="",d = "",d1[] ;
+        int c,p;
         DataInputStream read = new DataInputStream(new FileInputStream(fname));
         while (read.available() > 0) {
-            tmp = read.readLine().split(" ");
-            if (Integer.parseInt(tmp[9]) == numP) {
-                Calendar data = new GregorianCalendar(Integer.parseInt(tmp[8]), Integer.parseInt(tmp[7]), Integer.parseInt(tmp[6]));
-                Cart cart = new Cart(Integer.parseInt(tmp[0]), tmp[1], tmp[2], tmp[3], tmp[4], tmp[5], data, Integer.parseInt(tmp[9]));
+            c =read.readInt();
+            n =read.readUTF();
+            l =read.readUTF();
+            m =read.readUTF();
+            a = read.readUTF();
+            w = read.readUTF();
+            d = read.readUTF();
+            d1 = d.split(" ");
+            p = read.readInt();
+            if (p == numP) {
+                Calendar data = new GregorianCalendar(Integer.parseInt(d1[0]), Integer.parseInt(d1[1]), Integer.parseInt(d1[2]));
+                Cart cart = new Cart(c, n, l, m, a, w, data, p);
                 carts.add(cart);
             }
         }

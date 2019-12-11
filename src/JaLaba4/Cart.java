@@ -94,4 +94,15 @@ public class Cart {
     public String toString() {
         return String.valueOf(numberC) + ' ' + name + ' ' + lastN + ' ' + middleN + ' '+ adress + ' ' + work + ' ' + data.get(Calendar.DAY_OF_MONTH) + ' ' + data.get(Calendar.MONTH)+' '+ data.get(Calendar.YEAR) + ' ' + String.valueOf(numberP);
     }
+
+    public String getWork() {
+        return work;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+    public String getData(){
+        return  data.get(Calendar.DAY_OF_MONTH) + " " + data.get(Calendar.MONTH)+" "+ data.get(Calendar.YEAR);
+    }
 }

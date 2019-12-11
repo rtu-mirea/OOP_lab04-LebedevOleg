@@ -24,14 +24,14 @@ public class Main {
                     break;
                 case 2:
                     //region поиск фио
-                    String temp = "";
+                    int temp;
                     boolean ok = true;
                     if(carts.size() != 0){
                         try {
                             System.out.print("Введите номер карты: ");
-                            temp = in.next();
+                            temp = Integer.parseInt(in.next());
                             for(Cart i : carts){
-                                if(temp.equals(i.getNumberC()) == true) {
+                                if(temp == i.getNumberC()) {
                                     System.out.println("ФИО: " + i.getLastN() + " " + i.getName() + " " + i.getMiddleN());
                                     ok = false;
                                     break;
@@ -51,12 +51,12 @@ public class Main {
                     if(carts.size()>1) {
                         Cart a = null, b = null;
                         System.out.print("Введите ФИО первого пациента: ");
-                        name = in.next();
                         lName = in.next();
+                        name = in.next();
                         mName = in.next();
                         System.out.print("Введите имя второго пациента: ");
-                        name1 = in.next();
                         lName1 = in.next();
+                        name1 = in.next();
                         mName1 = in.next();
                         for (Cart i : carts){
                             if(name.equals(i.getName()) && lName.equals(i.getLastN()) && mName.equals(i.getMiddleN()))
@@ -72,6 +72,10 @@ public class Main {
                                     System.out.println("Пациенты не наблюдаются в одном заведении");
                                     break;
                                 }
+                            }
+                            else {
+                                System.out.println("Введенных пациентов нет в поликлинике");
+                                break;
                             }
                         }
                     }
@@ -95,8 +99,8 @@ public class Main {
                         else
                             System.out.println("нет пациентов в этой поликлинике");
                     }catch (Exception e){
-                        System.out.print("Вы не правильно ввели число!!!!");
-                    }
+                        System.out.print(e.getMessage());
+                   }
                     //endregion
                     break;
                 case 5:
